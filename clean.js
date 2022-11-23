@@ -588,6 +588,9 @@ const getBadges = (flags) => {
     case 131072:
       badges += 'Verified Bot Developer, ';
       break;
+    case 4194304:
+      badges += 'Active Developer, ';
+      break;
     case 4:
       badges += 'Hypesquad Event, ';
       break;
